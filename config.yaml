@@ -1,5 +1,7 @@
 - repositories:
     - StackStorm/github-meta
+    - StackStorm/st2web
+    - StackStorm/st2-packages
   milestones: []
   labels:
     - name: bug
