@@ -13,20 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import jsonschema
 import yaml
 
-import util
+CONFIG_FILENAME = 'config.yaml'
+CONFIG_SCHEMA_FILENAME = 'config.schema.yaml'
+
+def load_yaml_file(path):
+    with file(path, 'r') as stream:
+        text = yaml.load(stream)
+
+    return text
 
 
-def validate_schema(instance, schema):
-    return jsonschema.validate(instance=instance, schema=schema)
+def load_config():
+    return load_yaml_file(CONFIG_FILENAME)
 
 
-if __name__ == '__main__':
-    config = util.load_config()
-    config_schema = util.load_config_schema()
-
-    validate_schema(config, config_schema)
-
-    print yaml.safe_dump(config, default_flow_style=False)
+def load_config_schema():
+    return load_yaml_file(CONFIG_SCHEMA_FILENAME)
