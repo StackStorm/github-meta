@@ -1,15 +1,13 @@
 dependencies:
-  override:
+  post:
     - npm install -g yamljs
-    - npm install -g jsonlint
     - npm install -g github-sync-labels-milestones
 
 test:
-  pre:
-    - yaml2json config.schema.yaml > config.schema.json
-    - yaml2json config.yaml > config.json
   override:
-    - jsonlint -V config.schema.json config.json
+    - python scripts/validate.py
+  post:
+    - yaml2json config.yaml > config.json
 
 deployment:
   staging:
