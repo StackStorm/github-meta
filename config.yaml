@@ -1,0 +1,44 @@
+- repositories:
+    - StackStorm/github-meta
+  milestones: []
+  labels:
+    - name: bug
+      color: fc2929
+    - name: documentation
+      color: fef2c0
+    - name: duplicate
+      color: cccccc
+    - name: enchancement
+      color: 84b6eb
+    - name: feature
+      color: 207de5
+    - name: help wanted
+      color: "159818"
+    - name: in progress
+      color: fbca04
+    - name: invalid
+      color: e6e6e6
+    - name: missing tests
+      color: d93f0b
+    - name: proposal
+      color: bfd4f2
+    - name: question
+      color: cc317c
+    - name: refactor
+      color: fbca04
+    - name: RFR
+      color: eb6420
+    - name: "status:need more info"
+      color: 7b5804
+    - name: "status:to be verified"
+      color: fbca04
+    - name: "status:under discussion"
+      color: f7c6c7
+    - name: SUPPORT
+      color: bfd4f2
+    - name: tests
+      color: d7e102
+    - name: WIP
+      color: bfdadc
+    - name: wontfix
+      color: ffffff
