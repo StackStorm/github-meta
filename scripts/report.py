@@ -13,20 +13,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import jsonschema
+import os
+
+from github import Github
 import yaml
 
 import util
 
 
-def validate_schema(instance, schema):
-    return jsonschema.validate(instance=instance, schema=schema)
+g = Github(os.environ.get('GITHUB_TOKEN'))
 
 
 if __name__ == '__main__':
     config = util.load_config()
-    config_schema = util.load_config_schema()
 
-    validate_schema(config, config_schema)
+    for section in config:
+        defined_labels = [label['name'] for label in section.get('labels')]
 
-    print yaml.safe_dump(config, default_flow_style=False)
+        labels_unknown = {}
+
+        for repo_name in section.get('repositories'):
+            for label in g.get_repo(repo_name).get_labels():
+                if label.name not in defined_labels:
+                    if repo_name not in labels_unknown:
+                        labels_unknown[repo_name] = []
+
+                    labels_unknown[repo_name].append(label.name)
+
+        if labels_unknown:
+            print('# Labels that are not in spec:')
+            print(yaml.safe_dump(labels_unknown, default_flow_style=False))
