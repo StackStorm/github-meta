@@ -1,0 +1,9 @@
+dependencies:
+  override:
+    - npm install -g github-sync-labels-milestones
+
+test:
+  override:
+    - /bin/true
+  post:
+    - github-sync-labels-milestones -c config.json -t ${GITHUB_TOKEN}
