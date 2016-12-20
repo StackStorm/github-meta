@@ -1,9 +1,18 @@
 dependencies:
   override:
+    - npm install -g yamljs
+    - npm install -g jsonlint
     - npm install -g github-sync-labels-milestones
 
 test:
+  pre:
+    - yaml2json config.schema.yaml > config.schema.json
   override:
-    - /bin/true
-  post:
-    - github-sync-labels-milestones -c config.json -t ${GITHUB_TOKEN}
+    - jsonlint -V config.schema.json config.json
+
+deployment:
+  staging:
+    branch: master
+    owner: StackStorm
+    commands:
+      - github-sync-labels-milestones -c config.json -t ${GITHUB_TOKEN}
