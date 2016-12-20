@@ -1,0 +1,10 @@
+type: array
+items:
+  type: object
+  properties:
+    repositories:
+      type: array
+    milestones:
+      type: array
+    labels:
+      type: array
